@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The B-Side — Issue No. 01</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ─── Reset ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ─── Tokens ─── */
+  :root {
+    --cream:       #F4EFE4;
+    --cream-dark:  #EAE3D4;
+    --ink:         #1A1814;
+    --ink-mid:     #3D3829;
+    --ink-light:   #7A7060;
+    --amber:       #B5721A;
+    --amber-light: #D4903A;
+    --rule:        #C9BAA0;
+    --serif:       'Playfair Display', Georgia, serif;
+    --sans:        'Inter', system-ui, sans-serif;
+  }
+
+  /* ─── Page ─── */
+  body {
+    background: var(--cream-dark);
+    font-family: var(--sans);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Outer wrapper ─── */
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    padding: 3rem 3rem 0;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.6rem;
+  }
+  .meta-text {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+  .masthead {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 1.4rem;
+  }
+  .header-rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .header-rule-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--rule);
+  }
+  .header-rule-text {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    white-space: nowrap;
+  }
+
+  /* ─── VIBE / HERO IMAGE ─── */
+  .vibe {
+    width: 100%;
+    height: 260px;
+    background: #26211A;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+  .vibe img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    display: block;
+  }
+  .vibe-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .vibe-placeholder-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6B5F4E;
+  }
+  .vibe-caption {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 2rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(244,239,228,0.7);
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── BODY ─── */
+  .body {
+    padding: 0 3rem;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    padding: 2.2rem 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-eyebrow {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.55rem;
+    display: block;
+  }
+  .section-hed {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .section-hed em {
+    font-style: italic;
+  }
+  .section-body {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink-mid);
+  }
+  .section-body p + p {
+    margin-top: 0.9rem;
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    border-left: 2.5px solid var(--amber);
+    margin: 1.4rem 0 0;
+    padding: 0.3rem 0 0.3rem 1.1rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-light);
+  }
+
+  /* ─── IMAGE BLOCK ─── */
+  .image-block {
+    width: calc(100% + 6rem);
+    margin-left: -3rem;
+    margin-top: 1.6rem;
+    height: 200px;
+    background: #2E2619;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .image-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    display: block;
+  }
+  .image-block-placeholder {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5C4F38;
+  }
+
+  /* ─── HITS LIST (On the Radar) ─── */
+  .hits {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 1rem;
+  }
+  .hit {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .hit-marker {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--amber);
+    padding-top: 2px;
+    flex-shrink: 0;
+    min-width: 60px;
+  }
+  .hit-text {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-mid);
+  }
+  .hit-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ─── DIVIDER IMAGE ─── */
+  .mid-image {
+    width: calc(100% + 6rem);
+    margin-left: -3rem;
+    height: 160px;
+    background: #201C14;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+  }
+  .mid-image-placeholder {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4A3F2E;
+  }
+
+  /* ─── CLOSER ─── */
+  .closer {
+    background: var(--ink);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .closer-left {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .closer-right {
+    text-align: right;
+  }
+  .closer-name {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--rule);
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .closer-meta {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--cream-dark);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--rule);
+  }
+  .footer-text {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+  .footer-link {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ░░ HEADER ░░ -->
+  <header class="header">
+    <div class="header-meta">
+      <span class="meta-text">Issue No. 01</span>
+      <span class="meta-text">Sunday, June 15, 2026</span>
+    </div>
+
+    <h1 class="masthead">The B-Side</h1>
+
+    <div class="header-rule">
+      <div class="header-rule-line"></div>
+      <span class="header-rule-text">Sport &nbsp;·&nbsp; Music &nbsp;·&nbsp; Style &nbsp;·&nbsp; Culture</span>
+      <div class="header-rule-line"></div>
+    </div>
+  </header>
+
+  <!-- ░░ 01 — THE VIBE ░░ -->
+  <div class="vibe">
+    <!-- Replace with your own image: <img src="your-image.jpg" alt=""> -->
+    <div class="vibe-placeholder">
+      <span class="vibe-placeholder-label">Drop your vibe image here</span>
+    </div>
+    <span class="vibe-caption">— the week, distilled.</span>
+  </div>
+
+  <!-- ░░ BODY ░░ -->
+  <div class="body">
+
+    <!-- ░░ 02 — SPORT ░░ -->
+    <div class="section">
+      <span class="section-eyebrow">Sport</span>
+      <h2 class="section-hed">The cruelest kind of week</h2>
+      <div class="section-body">
+        <p>The thing about a penalty shootout is that it turns the world's greatest team sport into something completely individual. Everything Arsenal built over 120 minutes in Budapest — the defensive record, the Premier League title, the entire Arteta era distilled into one night — came down to Gabriel Magalhães standing 12 yards from goal, in front of PSG's supporters, needing to score. He blazed it over the bar. PSG retained the Champions League. The cruel footnote: Gabriel had been arguably Arsenal's best player on the night, throwing his body at everything across two hours. Arteta didn't plan for the shootout — every experienced penalty taker he had (Saka, Havertz, Ødegaard, Trossard) had already come off. What could have been a historic double became the most painful kind of near-miss.</p>
+        <p>Meanwhile in the NBA, Brunson closed it in San Antonio. Down 10 with eight minutes left in Game 5, the Knicks came back — for what felt like the fourth time this series — and won 94-90. Brunson dropped 45, the biggest Finals performance in franchise history. The parade is Thursday down the Canyon of Heroes. New York hasn't had a moment like this since 1973, and the city knows it.</p>
+      </div>
+      <div class="pull-quote">"He is a freaking 1A." — Mike Brown, Knicks head coach, on Jalen Brunson</div>
+    </div>
+
+    <!-- Mood image between sections -->
+    <div class="mid-image">
+      <!-- <img src="your-image.jpg" alt=""> -->
+      <span class="mid-image-placeholder">Mood image — drop in here</span>
+    </div>
+
+    <!-- ░░ 03 — SOUND OF THE WEEK ░░ -->
+    <div class="section">
+      <span class="section-eyebrow">Sound of the week</span>
+      <h2 class="section-hed"><em>Modest Mouse</em> — An Eraser and a Maze</h2>
+      <div class="section-body">
+        <p>Six songs from this album were turned in to Epic Records. Epic passed. So Modest Mouse left, went back to Isaac Brock's own Glacial Pace label — their first independent release since <em>The Lonesome Crowded West</em> in 1997 — and put the record out themselves. That context matters. This is a band operating outside the machine for the first time in nearly 30 years, and it sounds like it: looser, stranger, more willing to sit in discomfort. It's also the first album since the death of founding drummer Jeremiah Green in 2022, and Brock doesn't dodge it. "Third Side of the Moon" builds from something sparse into genuine grief — <em>I wish I paid attention to every word that you'd ever said / but you always spoke in a whisper, and I wasn't good at listening.</em></p>
+        <p>Not every track earns its runtime. But the ones that do feel like the real Modest Mouse — the version that made <em>Float On</em> and then kept going somewhere weirder. Start with "Picking Dragons' Pockets" and let it find you.</p>
+      </div>
+    </div>
+
+    <!-- ░░ 04 — STYLE ░░ -->
+    <div class="section">
+      <span class="section-eyebrow">Style</span>
+      <h2 class="section-hed">The short-sleeve shirt, done right</h2>
+      <div class="section-body">
+        <p>The short-sleeve shirt is the hardest summer piece to get right. Too stiff and it reads office casual in the worst possible way. Too loud and you look like you're trying. What you want is something that's been washed soft — the kind of thing you find on a thrift rack in the back corner with a faded stripe or a print that used to mean something. Pair it with straight-leg chinos in sand or stone (nothing cropped, nothing too slim), a white crew sock just visible above the shoe, and a trainer that isn't the focal point — a beat-up Air Max, a suede loafer if the evening calls for it.</p>
+        <p>The earth tones running menswear right now — camel, olive, washed navy — are still the move in June. Tonal dressing: same colour family, different textures, nothing matchy. The goal is looking like you got dressed once and it worked.</p>
+      </div>
+      <!-- Style image -->
+      <div class="image-block">
+        <!-- <img src="your-style-image.jpg" alt=""> -->
+        <span class="image-block-placeholder">Style image — drop in here</span>
+      </div>
+    </div>
+
+    <!-- ░░ 05 — SPOT OF THE WEEK ░░ -->
+    <div class="section">
+      <span class="section-eyebrow">Spot of the week</span>
+      <h2 class="section-hed">Sip &amp; Guzzle, West Village</h2>
+      <div class="section-body">
+        <p>Two bars in the same building, neither one an afterthought. Upstairs is Guzzle: proper saloon energy, run by Steve Schneider (Employees Only Singapore), where the classics come with just enough oomph to remind you someone thought about them. Downstairs is Sip: Shingo Gokan's Japanese cocktail bar, dimly lit, intimate — the kind of room where the bartender sets the drink down quietly and you realise you've ended up somewhere better than planned.</p>
+        <p>Go on a weeknight if you can. They make 12 wagyu burgers a night; the host will tell you unprompted if any are left. It was just named the best bar in North America, which is the kind of accolade that usually marks the end of something good — but this one still earns it. Walk-ins to Guzzle from 4pm, 29 Cornelia St.</p>
+      </div>
+    </div>
+
+    <!-- Mood image between sections -->
+    <div class="mid-image">
+      <!-- <img src="your-image.jpg" alt=""> -->
+      <span class="mid-image-placeholder">Mood image — drop in here</span>
+    </div>
+
+    <!-- ░░ 06 — ON THE RADAR ░░ -->
+    <div class="section">
+      <span class="section-eyebrow">On the radar</span>
+      <h2 class="section-hed">A few things worth your attention</h2>
+      <div class="hits">
+
+        <div class="hit">
+          <span class="hit-marker">Film —</span>
+          <span class="hit-text"><strong>Sinners (HBO Max).</strong> Ryan Coogler's vampire film set in 1932 Mississippi is the best movie of last year and it's not particularly close. Michael B. Jordan plays twins returning home to open a juke joint; it's a horror film about the blues, about what it costs to build something worth keeping. 16 Oscar nominations, four wins. Get the room dark, don't look it up first.</span>
+        </div>
+
+        <div class="hit">
+          <span class="hit-marker">Reading —</span>
+          <span class="hit-text"><strong>Born to Run by Bruce Springsteen.</strong> Not new, but with summer arrived and the city doing its thing, there's no better book about what it feels like to want something badly enough to work for it for years before anyone notices. The section on recording <em>Darkness on the Edge of Town</em> is worth the whole thing.</span>
+        </div>
+
+        <div class="hit">
+          <span class="hit-marker">Culture —</span>
+          <span class="hit-text"><strong>The Knicks parade is Thursday.</strong> Battery Park to City Hall, 10am, Canyon of Heroes. The city hasn't roared for basketball since 1970 — when it threw a parade for Willis Reed and that team — and it won't again for a while. If you're in New York, go.</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end .body -->
+
+  <!-- ░░ 07 — CLOSER ░░ -->
+  <div class="closer">
+    <div class="closer-left">See you<br>Sunday.</div>
+    <div class="closer-right">
+      <span class="closer-name">The B-Side</span>
+      <span class="closer-meta">Every Sunday</span>
+    </div>
+  </div>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <span class="footer-text">© The B-Side 2026</span>
+    <a href="#" class="footer-link">Subscribe</a>
+  </footer>
+
+</div><!-- end .page -->
+
+</body>
+</html>
